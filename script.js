@@ -6,18 +6,17 @@ function creatPaddles(num) {
     creatPaddless.className = 'color';
   }
 }
-creatPaddles(4);
+creatPaddles(3);
 function colorsPaddles() {
   const adicionandoCores = document.getElementsByClassName('color');
   adicionandoCores[0].style.backgroundColor = 'red';
   adicionandoCores[1].style.backgroundColor = 'blue';
-  adicionandoCores[2].style.backgroundColor = 'purple';
-  adicionandoCores[3].style.backgroundColor = 'yellow';
+  adicionandoCores[2].style.backgroundColor = 'yellow';
 }
 colorsPaddles();
 // Requisito 3;
 function colorBlack() {
-  document.getElementsByClassName('color')[0].style.backgroundColor = 'black';
+  document.getElementsByClassName('color')[0].style.backgroundColor = 'red';
 }
 colorBlack();
 // Requisito 4;
@@ -56,6 +55,7 @@ function changeClass() {
   });
 }
 changeClass();
+
 // Ajuda do Murilo Gonçalves
 function clickColor() {
   const selectBoard = document.getElementById('pixel-board');
@@ -109,19 +109,38 @@ function size() {
 }
 size();
 
+
+const aleatoreColors = (num) => {
+  const pai = document.querySelector('section');
+  for (let index = 1; index <= num; index += 1) {
+    const div = document.createElement('div');
+    pai.appendChild(div);
+    div.classList.add('aleatores');
+    div.classList.add('selected');
+    div.classList.add('color');
+  }
+};
+aleatoreColors(5)
+
 function randomColors() {
-  const color = document.querySelectorAll('.color');
-  for (let index = 1; index < color.length; index += 1) {
+  const color = document.querySelectorAll('.aleatores');
+  for (let index = 0; index < color.length; index += 1) {
     const r = Math.floor(Math.random() * 255);
     const g = Math.floor(Math.random() * 255);
     const b = Math.floor(Math.random() * 255);
-    const color1 = ('rgb(' + r + ',' + g + ',' + b + ')');
-    const color2 = ('rgb(' + r + ',' + g + ',' + b + ')');
-    const color3 = ('rgb(' + r + ',' + g + ',' + b + ')');
-    const color4 = ('rgb(' + r + ',' + g + ',' + b + ')');
-    const cor = [color1, color2, color3, color4];
-    color[index].style.backgroundColor = cor[index];
-    window.onload = color[index].style.backgroundColor;
+    const cor = `rgb(${r}, ${g}, ${b})`;
+    color[index].style.backgroundColor = cor;
   }
 }
 randomColors();
+
+function click() {
+  const selected = document.querySelector('section');
+  selected.addEventListener('click', (e) => {
+    const pixels = e.target;
+
+      const colorSelected = document.querySelector('.aleatores').style.backgroundColor;
+      pixels.style.backgroundColor = colorSelected;
+  });
+}
+click();
